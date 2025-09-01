@@ -5,6 +5,7 @@ This project is a small setup to test the issue described [here](https://github.
 ## How to test
 
 - Run containers with ```docker compose up -d``` (Adapt the compose.yml file if needed)
+- Install vendors: `docker compose exec symfony symfony composer install`
 - Check that traefik is running. Go to `http://traefik.localhost`
 - To test url generation : go to `http://localhost/app1/test`
 - To test form_login forward use case: try to reach `http://localhost/app1/admin`
