@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+    symfony:
+        build: .
+        container_name: symfony-cli
+        expose:
+            - "8000"
+        volumes:
+            - ./:/app
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.symfony.rule=PathPrefix(`/app1`)"
+            - "traefik.http.routers.symfony.entrypoints=http"
+            - "traefik.http.middlewares.symfony-strip.stripprefix.prefixes=/app1"
+            - "traefik.http.routers.symfony.middlewares=symfony-strip"
+
+    traefik:
+        image: traefik:2.10
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+            - ./traefik.yml:/etc/traefik/traefik.yml:delegated
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.services.${COMPOSE_PROJECT_NAME}.loadbalancer.server.port=8080"
+            - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.entrypoints=http"
+            - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.rule=Host(`traefik.localhost`)"
+        network_mode: host

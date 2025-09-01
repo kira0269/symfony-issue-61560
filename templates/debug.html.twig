@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    Uri of current request: {{ dump(request.uri) }}
+    <br>
+    Uri or request created with HttpUtils::createRequest(): {{ dump(security_request.uri) }}
+{% endblock body %}
