@@ -1,6 +1,6 @@
 # Test case for issue https://github.com/symfony/symfony/issues/61560
 
-This project is a small setup to test the issue describe [here](https://github.com/symfony/symfony/issues/61560).
+This project is a small setup to test the issue described [here](https://github.com/symfony/symfony/issues/61560).
 
 ## How to test
 
